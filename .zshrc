@@ -19,10 +19,10 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user dir_writable dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time root_indicator background_jobs virtualenv time)
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
-POWERLEVEL9K_MODE="nerdfont-complete"
-# POWERLEVEL9K_
-# POWERLEVEL9K_
-# POWERLEVEL9K_
+POWERLEVEL9K_USER_ICON="\uF415"
+POWERLEVEL9K_ROOT_ICON="\uF09C"
+POWERLEVEL9K_SUDO_ICON=$'\uF09C'
+POWERLEVEL9K_VCS_GIT_ICON="\uF408"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
