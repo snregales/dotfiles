@@ -4,8 +4,14 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Path to your pyenv installation
+export PYENV_ROOT="$HOME/.pyenv"
+
 # Path to your custom oh-my-zsh installations
 export ZSH_CUSTOM="$ZSH/custom"
+
+# add pyenv to path
+export PATH="$PYENV_ROOT/bin:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -115,3 +121,4 @@ fi
 #
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
+eval "$(pyenv init -)"
