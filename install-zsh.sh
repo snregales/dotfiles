@@ -11,3 +11,4 @@ md ~/.config/fontconfig/conf.d/ && cd ~/.config/fontconfig/conf.d/ && \
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
 fc-cache -vf ~/.local/share/fonts/
 cd ~
+rm .zshrc && ln -s $DOTFILE/.zshrc .zshrc
