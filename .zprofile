@@ -29,6 +29,12 @@ if [ -d "${HOME}/.local/bin" ] ; then
     PATH="${HOME}/.local/bin:${PATH}"
 fi
 
+if [ -d "${HOME}/.pyenv" ] ; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+fi
+
 if [[ ! -d ${HOME}/Repositories ]]; then
     mkdir ${HOME}/Repositories
     REPO=${HOME}/Repositories

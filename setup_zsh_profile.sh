@@ -3,7 +3,7 @@
 
 if ! [ -x $(command -v zsh) ]; then
 	echo "Install pre requirements"
-	sh ${HOME}/package_manager.sh zsh
+	${HOME}/package_manager.sh zsh
 fi
 
 if ! [ -d ${HOME}/.oh-my-zsh ]; then
