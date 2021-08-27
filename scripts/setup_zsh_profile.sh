@@ -2,8 +2,12 @@
 # install Oh My Zsh, if not set 
 
 if ! [ -x $(command -v zsh) ]; then
+	if [ -z ${DOT_PATH} ]; then
+    	echo "DOT_PATH is not set, this variable gives the path to dotfiles repo"
+    	exit 1
+	fi
 	echo "Install pre requirements"
-	${HOME}/package_manager.sh zsh
+	${DOT_PATH}/scripts/package_manager.sh zsh
 fi
 
 if ! [ -d ${HOME}/.oh-my-zsh ]; then

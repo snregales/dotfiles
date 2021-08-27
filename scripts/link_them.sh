@@ -22,7 +22,7 @@ fi
 
 if $(git rev-parse --is-bare-repository); then
     echo "This is a bare repository no linking needed, just make sure your bare repo is cloned on ${HOME}"
-    exit 1
+    exit 0
 fi
 
 mkdir -p ${HOME}/.archive
