@@ -37,7 +37,7 @@ Thus one can add the following to their devcontainer.json in order to conistant 
 		"terminal.integrated.defaultProfile.linux": "zsh",
 		"dotfiles.repository": "snregales/dotfiles",
 		"dotfiles.targetPath": "~/dotfiles",
-		"dotfiles.installCommand": "devcontainer.sh",
+		"dotfiles.installCommand": "scripts/devcontainer.sh",
         ...
     }
 ```
