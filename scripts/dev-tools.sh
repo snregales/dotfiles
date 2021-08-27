@@ -14,6 +14,7 @@ if ! [ -x "$(command -v docker)" ]; then
 	sudo groupadd docker && sudo usermod -aG docker ${USER};
 fi
 
+<<<<<<< HEAD
 manager="$(${HOME}/package_manager.sh which_package_manager)"
 if ! [ -d ${HOME}/.pyenv ]; then
 	case "$(basename -- ${manager})" in
@@ -41,6 +42,19 @@ if ! [ -d ${HOME}/.local/pipx ]; then
 	python -m pip install pipx
 	source ${HOME}/.profile
 fi
+=======
+function install_poetry() {
+	if ! [ -d ${HOME}/.local/pipx ]; then
+    	python3 -m pip install -U pip
+    	python3 -m pip install pipx
+    	source ${HOME}/.profile
+    fi
+
+	if ! [ -x "$(command -v poetry)" ]; then
+    	python3 -m pipx install poetry
+    fi
+}
+>>>>>>> 271f385... Fix python not found problem
 
 if ! [ -x "$(command -v poetry)" ]; then
 	python -m pipx install poetry
