@@ -1,16 +1,8 @@
 #!/bin/bash
 
 function link_file() {
-    if [ -f ${HOME}/$1 ] && ! [ -L ${HOME}/$1 ]; then
-        echo "Archiving ${HOME}/$1"
-        mv ${HOME}/$1 ${HOME}/.archive
-    elif [ $(readlink -f ${HOME}/$1) != ${DOT_PATH}/$1 ] ; then
-        echo "Removing existing link not pointing to ${DOT_PATH}/$1"
-        rm ${HOME}/$1
-    else
-        echo "Link already pointing to ${DOT_PATH}/$1"
-        return 0
-    fi
+    [ -L ${HOME}/$1 ] && rm -r ${HOME}/$1
+    [ -f ${HOME}/$1 ] && rm mv ${HOME}/$1 ${HOME}/.archive
     echo "Linked to ${DOT_PATH}/$1"
     ln -s ${DOT_PATH}/$1 ${HOME}/$1
 }
@@ -20,19 +12,19 @@ if [ -z ${DOT_PATH} ]; then
     exit 1
 fi
 
-if $(git rev-parse --is-bare-repository) && [[ "${DOT_PATH}" == "${HOME}" ]]; then
-    echo "This is a bare repository no linking needed"
-    exit 0
+if [[ $DOT_PATH == $HOME ]] && [ -d $HOME/dotfiles ]; then                                                                                                                   ─╯
+  cd $HOME/dotfiles
+  [ "$(git rev-parse --is-inside-git-dir)" ] && exit 0
+  cd -
 fi
+
 
 mkdir -p ${HOME}/.archive
 
 link_file .p10k.zsh
 link_file .zshrc
 
-if [ -f ${HOME}/.profile ] ; then
-    mv ${HOME}/.profile ${HOME}/.archive
-fi
+[ -f ${HOME}/.profile ] && mv ${HOME}/.profile ${HOME}/.archive
 
 link_file .zprofile
 link_file antigen.zsh

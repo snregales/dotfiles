@@ -18,7 +18,7 @@ this alias is later added to the files that you pulled such as .bash_aliases
 ```bash
 dotfiles config --local status.showUntrackedFiles no
 dotfiles remote add origin https://github.com/snregales/dotfiles.git
-dotfiles pull origin/main
+dotfiles pull origin main
 ```
 
 ### Linking
