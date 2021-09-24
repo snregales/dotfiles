@@ -7,7 +7,9 @@ function link_file() {
     ln -s ${DOT_PATH}/$1 ${HOME}/$1
 }
 
-if [ -z ${DOT_PATH} ]; then
+[ -f /.dockerenv ] && DOT_PATH=${HOME}/dotfiles
+
+if [ -z ${DOT_PATH}]; then
     echo "DOT_PATH is not set, this variable gives the path to dotfiles repo"
     exit 1
 fi
