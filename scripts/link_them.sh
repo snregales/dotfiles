@@ -32,6 +32,8 @@ link_file .zshrc
 
 link_file .zprofile
 link_file antigen.zsh
+link_file .gitconfig
+link_file .gitconfig.user
 
 cat << EOF | tee -a ${HOME}/.bash-aliases
 alias zshconfig='nvim ${HOME}/.zshrc'

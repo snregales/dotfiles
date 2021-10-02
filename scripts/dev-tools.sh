@@ -23,7 +23,7 @@ function help() {
 }
 
 function install_essential() {
-	${SCRIPTS_PATH}/package_manager.sh zsh neovim tree fonts-firacode
+	${SCRIPTS_PATH}/package_manager.sh zsh neovim tree fonts-firacode gnupg2
 }
 
 function install_docker() {

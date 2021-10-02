@@ -1,0 +1,10 @@
+[user]
+    name = Sharlon N. Regales
+    email = sharlonregales+dev@gmail.com
+    #signingkey = sharlonregales+dev@gmail.com
+
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgSign = true
