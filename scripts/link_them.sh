@@ -1,4 +1,9 @@
 #!/bin/bash
+# DO NOT run this script if dotfile is the git directory.
+# Meaning dotfile is the `.git` directory
+# this can be evaluated with the following command
+# from inside the dotfile directory
+# `echo $(git rev-parse --is-inside-git-dir)`
 
 function link_file() {
     [ -L ${HOME}/$1 ] && rm -r ${HOME}/$1
@@ -14,12 +19,9 @@ if [ -z ${DOT_PATH}]; then
     exit 1
 fi
 
-if [[ $DOT_PATH == $HOME ]] && [ -d $HOME/dotfiles ]; then                                                                                                                   ─╯
-  cd $HOME/dotfiles
-  [ "$(git rev-parse --is-inside-git-dir)" ] && exit 0
-  cd -
+if ! [ -d ${DOT_PATH} ]; then
+    echo "DOT_PATH is not set properly; this should give the path to the dotfiles repo"
 fi
-
 
 mkdir -p ${HOME}/.archive
 

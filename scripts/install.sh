@@ -13,6 +13,14 @@ fi
 
 SCRIPTS_PATH=${DOT_PATH}/scripts
 
-${SCRIPTS_PATH}/setup_zsh_profile.sh
-${SCRIPTS_PATH}/dev-tools.sh
-${SCRIPTS_PATH}/link_them.sh
+if ! [ -f /.dockerenv ] ; then
+    ${SCRIPTS_PATH}/setup_zsh_profile.sh
+    ${SCRIPTS_PATH}/dev-tools.sh
+fi
+
+if [[ $DOT_PATH == $HOME ]] && [ -d $HOME/dotfiles ]; then                                                                                                                   ─╯
+  cd $HOME/dotfiles
+  [ "$(git rev-parse --is-inside-git-dir)" ] || ${SCRIPTS_PATH}/link_them.sh
+  cd -
+fi
+
