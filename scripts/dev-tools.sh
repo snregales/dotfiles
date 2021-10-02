@@ -11,15 +11,19 @@ manager="$(${SCRIPTS_PATH}/package_manager.sh which_package_manager)"
 function help() {
 	echo "Install development tools. no option will install all tools listed"
 	echo
-	echo "Syntax: scriptTemplate [-h|d]"
+	echo "Syntax: scriptTemplate [-h|e|p|P|g|d]"
   	echo "options:"
     echo "h     Print this Help."
-	echo "d     Install only tools for devcontainer"
+	echo "e     Install essentials"
+	echo "p     Install pyenv"
+	echo "P     Install poetry"
+	echo "g     Install github"
+	echo "d     Install docker"
     echo
 }
 
-function minimal_install() {
-	${SCRIPTS_PATH}/package_manager.sh neovim tree fonts-firacode
+function install_essential() {
+	${SCRIPTS_PATH}/package_manager.sh zsh neovim tree fonts-firacode
 }
 
 function install_docker() {
@@ -32,15 +36,17 @@ function install_docker() {
     fi
 }
 
-function install_poetry() {
+function install_pipx() {
 	if ! [ -d ${HOME}/.local/pipx ]; then
     	python3 -m pip install -U pip
     	python3 -m pip install pipx
     	source ${HOME}/.profile
     fi
+}
 
+function install_poetry() {
 	if ! [ -x "$(command -v poetry)" ]; then
-    	python3 -m pipx install poetry
+    	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
     fi
 }
 
@@ -62,8 +68,10 @@ function install_pyenv() {
 	    		;;
     	esac
     	curl https://pyenv.run | bash
-		pye
-    	python -V
+		${version} = "$(python3 -V | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')"
+    	pyenv install ${version}
+		pyenv global ${version}
+		[ "$(which python)" == *"${HOME}/.pyenv"* ] install_pipx 
     fi
 }
 
@@ -85,30 +93,40 @@ function install_github() {
 	fi
 }
 
-function install_devcontainer() {
-	minimal_install
-	install_github
-	install_poetry
-}
 
-while getopts ":hd:" option; do
+while getopts ":hepPgd" option; do
 	case ${option} in
 		h) # help message
 			help
-			exit;;
-		d) # devcontainer environment
-			install_devcontainer
-			exit;;
+			;;
+		e) # essiantal (zsh, neovim, tree)
+			install_essential
+			;;
+		p) # pyenv
+			install_pyenv
+			;;
+		P) # poetry
+			install_poetry
+			;;
+		g) # github
+			install_github
+			;;
+		d) # docker
+			install_docker
+			;;
 		\?) # Invalid option
 			echo "Invalid option(s)"
+			help
 			exit;;
 	esac
 done
 
 if [ ${OPTIND} -eq 1 ] ; then
-	install_devcontainer
+	install_essential
+	install_poetry
 	install_pyenv
 	install_docker
+	install_github
 fi
 
 exec ${SHELL}
